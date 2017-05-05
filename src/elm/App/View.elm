@@ -2,13 +2,15 @@ module App.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import App.Types exposing (Msg(..), Model)
 import Html.Events exposing (onClick)
+import App.Types exposing (Msg(..), Model)
 import Code
 import Regex
 import Array
 import Components.CodeBlock
 import Components.Stats
+import Components.HireButton
+import Components.Modal
 
 
 view : Model -> Html Msg
@@ -20,16 +22,19 @@ view model =
         newCoder =
             { ebitRate = 2, cost = 100 }
     in
-        div [ class "container-fluid background" ]
-            [ div [ class "row" ]
-                [ div [ class "col-md-4 container" ]
-                    [ Components.Stats.view model
-                    , button [ class "btn btn-primary", onClick <| AddCoder newCoder ] [ text "Hire a coder" ]
-                    , button [ class "btn btn-primary", onClick <| UpgradeGear 2 ] [ text "Upgrade gear" ]
+        div []
+            [ div [ class "container-fluid background" ]
+                [ div [ class "row" ]
+                    [ div [ class "col-md-4 container" ]
+                        [ Components.Stats.view model
+                        , Components.HireButton.view
+                        , button [ class "btn btn-primary", onClick <| UpgradeGear 2 ] [ text "Upgrade gear" ]
+                        ]
+                    , div [ class "col-md-6" ]
+                        [ Components.CodeBlock.view codeString ]
                     ]
-                , div [ class "col-md-6" ]
-                    [ Components.CodeBlock.view codeString ]
                 ]
+                , Components.Modal.view model.applicant
             ]
 
 

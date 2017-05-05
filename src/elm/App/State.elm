@@ -42,4 +42,4 @@ subscriptions model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { ebitRate = 1, ebit = 0, coders = [] }, Cmd.none )
+    ( { ebitRate = 0, ebit = 0, coders = [], applicant = { ebitRate = 3 , cost = 150 , name = "Hessu Kypärä"} }, Cmd.none )

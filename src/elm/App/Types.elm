@@ -1,6 +1,6 @@
 module App.Types exposing (..)
 
-import Shared.Types exposing (Coder)
+import Shared.Types exposing (Coder, Applicant)
 import Time exposing (Time)
 import Keyboard
 
@@ -18,4 +18,5 @@ type alias Model =
     { ebit : Int
     , ebitRate : Int
     , coders : List Coder
+    , applicant : Applicant
     }
