@@ -52,7 +52,7 @@ update msg model =
             , Cmd.none
             )
 
-        UpgradeGear extra ->
+        UpgradeOffice extra ->
             ( { model | ebitRate = model.ebitRate + extra }, Cmd.none )
 
 

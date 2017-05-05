@@ -19,7 +19,7 @@ view model =
         , br [] []
         , span [ class "stats-value" ] [ text <| toString <| List.length model.coders ]
         , br [] []
-        , span [ class "stats-label" ] [ text "Gear level" ]
+        , span [ class "stats-label" ] [ text "Office level" ]
         , br [] []
         , span [ class "stats-value" ] [ text <| toString <| model.ebitRate ]
         ]

@@ -29,7 +29,7 @@ view model =
                     [ div [ class "col-md-4 container" ]
                         [ Components.Stats.view model
                         , Components.HireButton.view
-                        , button [ class "btn btn-primary", onClick <| UpgradeGear 2 ] [ text "Upgrade gear" ]
+                        , button [ class "btn btn-primary", onClick <| UpgradeOffice 2 ] [ text "Upgrade Office" ]
                         ]
                     , div [ class "col-md-6" ]
                         [ Components.CodeBlock.view codeString ]
