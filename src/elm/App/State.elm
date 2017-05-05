@@ -27,23 +27,25 @@ update msg model =
             ( model, (getRandomCoderIndex payload) )
 
         AddCoder payload ->
-            ( { model
-                | coders = ((Coder payload.ebitRate payload.cost (getCoderByIndex payload.coderIndex)) :: model.coders)
-                , ebit = model.ebit - payload.cost
-          let
-            randomCoder = (getCoderByIndex payload.coderIndex)
-            filledCoder = ({ randomCoder | ebitRate = payload.ebitRate , cost = payload.cost })
-          in
-            ({ model
-            | coders = filledCoder :: model.coders
-            , ebit = (model.ebit - payload.cost)
-            , applicant =
-              { ebitRate = payload.ebitRate
-              , name = randomCoder.name
-              , cost = payload.cost
-              , imageClass = randomCoder.imageClass
-              }
-            }, Cmd.none )
+            let
+                randomCoder =
+                    (getCoderByIndex payload.coderIndex)
+
+                filledCoder =
+                    ({ randomCoder | ebitRate = payload.ebitRate, cost = payload.cost })
+            in
+                ( { model
+                    | coders = filledCoder :: model.coders
+                    , ebit = (model.ebit - payload.cost)
+                    , applicant =
+                        { ebitRate = payload.ebitRate
+                        , name = randomCoder.name
+                        , cost = payload.cost
+                        , imageClass = randomCoder.imageClass
+                        }
+                  }
+                , Cmd.none
+                )
 
         Tick time ->
             ( { model
