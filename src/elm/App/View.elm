@@ -14,25 +14,34 @@ import Components.Stats
 view : Model -> Html Msg
 view model =
     let
-        splitRegex =
-            Regex.regex "\n"
-
-        codeChunks =
-            Regex.split Regex.All (splitRegex) Code.code |> Array.fromList
-
-        rowCount =
-            8
-
         codeString =
-            Array.slice (Basics.max 0 (model.ebit - rowCount)) (model.ebit + (rowCount * 2)) codeChunks
-                |> Array.toList
-                |> List.take model.ebit
-                |> String.join "\n"
+            getCodeString Code.code model.ebit
+
+        newCoder =
+            { ebitRate = 2, cost = 100 }
     in
         div [ class "container-fluid background" ]
             [ div [ class "container" ]
                 [ Components.Stats.view model
                 ]
-            , button [ onClick <| AddCoder { ebitRate = 2, cost = 100 } ] [ text "Hire a coder" ]
+            , button [ onClick <| AddCoder newCoder ] [ text "Hire a coder" ]
             , Components.CodeBlock.view codeString
             ]
+
+
+getCodeString : String -> Int -> String
+getCodeString code amount =
+    let
+        splitRegex =
+            Regex.regex "\n"
+
+        codeChunks =
+            Regex.split Regex.All (splitRegex) code |> Array.fromList
+
+        rowCount =
+            8
+    in
+        Array.slice (Basics.max 0 (amount - rowCount)) (amount + (rowCount * 2)) codeChunks
+            |> Array.toList
+            |> List.take amount
+            |> String.join "\n"
