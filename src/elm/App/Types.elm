@@ -1,5 +1,5 @@
 module App.Types exposing (..)
-
+import Shared.Types exposing (Customer)
 
 type Msg
     = NoOp
@@ -10,9 +10,4 @@ type alias Model =
     { coffee : Int
     , ebit : Int
     , customers : List Customer
-    }
-
--- Move to Shared.Types
-type alias Customer =
-    { money : Int
     }
