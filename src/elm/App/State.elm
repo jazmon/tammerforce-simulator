@@ -1,5 +1,6 @@
 module App.State exposing (..)
-import App.Types exposing(..)
+
+import App.Types exposing (..)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -8,8 +9,11 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        Increment ->
-            ( { model | ebit = model.ebit + 1 }, Cmd.none )
+        GenerateEbit amount ->
+            ( { model | ebit = model.ebit + amount }, Cmd.none )
+
+        AddCoder coder ->
+            ( { model | coders = coder :: model.coders }, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -19,4 +23,4 @@ subscriptions model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { coffee = 0, ebit = 0, customers = [] }, Cmd.none )
+    ( { ebitRate = 0, ebit = 0, coders = [] }, Cmd.none )

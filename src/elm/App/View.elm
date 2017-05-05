@@ -1,4 +1,5 @@
 module App.View exposing (..)
+
 import Html exposing (..)
 import App.Types exposing (Msg, Model)
 

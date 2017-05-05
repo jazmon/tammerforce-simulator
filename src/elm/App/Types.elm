@@ -1,13 +1,16 @@
 module App.Types exposing (..)
-import Shared.Types exposing (Customer)
+
+import Shared.Types exposing (Customer, Coder)
+
 
 type Msg
     = NoOp
-    | Increment
+    | GenerateEbit Int
+    | AddCoder Coder
 
 
 type alias Model =
-    { coffee : Int
-    , ebit : Int
-    , customers : List Customer
+    { ebit : Int
+    , ebitRate : Int
+    , coders : List Coder
     }
