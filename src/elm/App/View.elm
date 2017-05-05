@@ -10,6 +10,7 @@ import Array
 import Components.CodeBlock
 import Components.Stats
 
+
 view : Model -> Html Msg
 view model =
     let
@@ -17,18 +18,21 @@ view model =
             Regex.regex "\n"
 
         codeChunks =
-            Array.fromList <| Regex.split Regex.All (splitRegex) Code.code
+            Regex.split Regex.All (splitRegex) Code.code |> Array.fromList
 
         rowCount =
             8
 
         codeString =
-            String.join "\n" <| List.take model.ebit <| Array.toList <| Array.slice (Basics.max 0 (model.ebit - rowCount)) (model.ebit + (rowCount * 2)) codeChunks
+            Array.slice (Basics.max 0 (model.ebit - rowCount)) (model.ebit + (rowCount * 2)) codeChunks
+                |> Array.toList
+                |> List.take model.ebit
+                |> String.join "\n"
     in
         div [ class "container-fluid background" ]
             [ div [ class "container" ]
                 [ Components.Stats.view model
                 ]
-            , button [ onClick <| AddCoder { ebitRate = 2, cost = 1 } ] [ text "Hire a coder" ]
+            , button [ onClick <| AddCoder { ebitRate = 2, cost = 100 } ] [ text "Hire a coder" ]
             , Components.CodeBlock.view codeString
             ]
