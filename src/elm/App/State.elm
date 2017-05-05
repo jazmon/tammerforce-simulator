@@ -24,7 +24,7 @@ update msg model =
             )
 
         TriggerAddCoder payload ->
-            ( model, (getRandomCoderIndex payload) )
+            ( model, getRandomCoderIndex )
 
         AddCoder payload ->
           ( { model
@@ -34,8 +34,16 @@ update msg model =
             } , Cmd.none )
 
         Tick time ->
+            ( model, (getRoundRandomFactor) )
+
+        ExecuteRound payload ->
+          let
+            ebitRate = (List.sum <| List.map .ebitRate model.coders)
+            roundResult = if ebitRate > 0 then payload.randomFactor + ebitRate else 0
+          in
             ( { model
-                | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders)
+                | ebit = model.ebit + roundResult
+                , previousRoundResult = roundResult
                 , codePosition = getCodeStringPos Code.code model.codePosition (List.sum <| List.map .ebitRate model.coders)
               }
             , Cmd.none

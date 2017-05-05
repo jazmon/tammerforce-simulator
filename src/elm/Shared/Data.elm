@@ -7,13 +7,20 @@ import Shared.Types exposing (..)
 import App.Types exposing (..)
 
 
-randomMember : Int -> Generator Int
-randomMember maxInt = Random.int 0 maxInt
+randomInteger : Int -> Generator Int
+randomInteger maxInt = Random.int 0 maxInt
 
-getRandomCoderIndex : CoderCreationTriggeringPayload -> Cmd Msg
-getRandomCoderIndex payload = Random.generate
+getRoundRandomFactor : Cmd Msg
+getRoundRandomFactor = Random.generate
+  (\ generatedRandomFactor -> ExecuteRound { randomFactor = generatedRandomFactor })
+  (randomInteger 100
+  )
+
+
+getRandomCoderIndex :  Cmd Msg
+getRandomCoderIndex = Random.generate
   (\ generatedRandomIndex -> AddCoder { coderIndex = generatedRandomIndex })
-  (randomMember (List.length coderNames)
+  (randomInteger (List.length coderNames)
   )
 
 coderNames : List Coder

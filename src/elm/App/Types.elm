@@ -10,6 +10,7 @@ type Msg
     | GenerateEbit Int
     | TriggerAddCoder CoderCreationTriggeringPayload
     | AddCoder { coderIndex : Int }
+    | ExecuteRound { randomFactor : Int }
     | Tick Time
     | KeyMsg Keyboard.KeyCode
     | UpgradeOffice Int Int
