@@ -18,10 +18,10 @@ getRandomCoderIndex payload = Random.generate
 
 coderNames : List Coder
 coderNames =
-  [ (Coder 3 2 "Hessu Kypärä" "miro")
-  , (Coder 2 1 "Ahto Simakuutio" "op")
-  , (Coder 4 3 "Markku Markkula" "ippe")
-  , (Coder 5 1 "Jorma Teräs" "eetu")
+  [ (Coder 3 20 "Hessu Kypärä" "miro")
+  , (Coder 2 10 "Ahto Simakuutio" "op")
+  , (Coder 4 30 "Markku Markkula" "ippe")
+  , (Coder 5 10 "Jorma Teräs" "eetu")
   ]
 
 
