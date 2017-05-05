@@ -15,7 +15,12 @@ update msg model =
             ( { model | ebit = model.ebit + amount }, Cmd.none )
 
         AddCoder coder ->
-            ( { model | coders = coder :: model.coders }, Cmd.none )
+            ( { model
+                | coders = coder :: model.coders
+                , ebit = model.ebit - coder.cost
+              }
+            , Cmd.none
+            )
 
         Tick time ->
             ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )
