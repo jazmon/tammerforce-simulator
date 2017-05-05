@@ -29,10 +29,10 @@ view applicant =
                 [ text "Name: "
                 , text applicant.name
                 , br [][]
-                , text "Cost: "
+                , text "Cost (k€): "
                 , text <| toString <| applicant.cost
                 , br [][]
-                , text "Ebit rate: "
+                , text "EBIT rate: "
                 , text <| toString <| applicant.ebitRate
                 ]
               ]
