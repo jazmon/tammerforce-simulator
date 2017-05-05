@@ -1,6 +1,6 @@
 module App.Types exposing (..)
 
-import Shared.Types exposing (Customer, Coder)
+import Shared.Types exposing (Coder)
 import Time exposing (Time)
 import Keyboard
 

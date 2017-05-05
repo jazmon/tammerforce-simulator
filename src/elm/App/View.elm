@@ -7,7 +7,8 @@ import Html.Events exposing (onClick)
 import Code
 import Regex
 import Array
-
+import Components.CodeBlock
+import Components.Stats
 
 view : Model -> Html Msg
 view model =
@@ -24,17 +25,10 @@ view model =
         codeString =
             String.join "\n" <| List.take model.ebit <| Array.toList <| Array.slice (Basics.max 0 (model.ebit - rowCount)) (model.ebit + (rowCount * 2)) codeChunks
     in
-        div [ class "container-fluid" ]
+        div [ class "container-fluid background" ]
             [ div [ class "container" ]
-                [ span [] [ text <| toString <| model.ebit ]
+                [ Components.Stats.view model
                 ]
             , button [ onClick <| AddCoder { ebitRate = 2, cost = 1 } ] [ text "Hire a coder" ]
-            , div [ class "container" ]
-                [ pre
-                    [ class "code-block" ]
-                    [ Html.code
-                        []
-                        [ text codeString ]
-                    ]
-                ]
+            , Components.CodeBlock.view codeString
             ]

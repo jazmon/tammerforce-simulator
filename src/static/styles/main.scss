@@ -3,12 +3,36 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 // can add Boostrap overrides, additional Sass/CSS below...
-$TEXT_COLOR: rgb(28, 244, 43);
+$COLOR_TEXT_PRIMARY: rgb(28, 244, 43);
+$COLOR_TEXT_SECONDARY_INVERSE: rgba(255, 255, 255, 0.54);
+$COLOR_TEXT_TERTIARY_INVERSE: rgba(255, 255, 255, 0.3);
 $GLOW_COLOR: rgb(202, 254, 192);
+$COLOR_TRANSPARENT: rgba(0, 0, 0, 0);
 $BACKGROUND_COLOR: #000;
+
+.background {
+    background: $BACKGROUND_COLOR;
+    opacity: 0.87;
+}
+.stats-container {
+  background: $COLOR_TRANSPARENT;
+  position: absolute;
+  margin: 20px;
+  bottom: 50%;
+  left: 30px;
+}
+.stats-label {
+  color: $COLOR_TEXT_TERTIARY_INVERSE;
+  font-size: 25px;
+}
+.stats-value {
+  color: $COLOR_TEXT_SECONDARY_INVERSE;
+  font-size: 40px;
+}
 .code-block {
-  background: $BACKGROUND_COLOR;
-  color: $TEXT_COLOR;
+  background-color: $COLOR_TRANSPARENT;
+  border-color: $COLOR_TRANSPARENT;
+  color: $COLOR_TEXT_PRIMARY;
   text-shadow: 0 0 3px $GLOW_COLOR;
   animation-duration: 0.6s;
   animation-name: glow;
