@@ -2,7 +2,7 @@ module Shared.Types exposing (..)
 
 
 type alias Coder =
-    { ebitRate : Int }
+    { ebitRate : Int, cost : Int }
 
 
 type alias Customer =
