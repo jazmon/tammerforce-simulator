@@ -52,6 +52,7 @@ update msg model =
         KeyMsg keycode ->
             ( { model
                 | ebit = model.ebit + model.ebitRate
+                , previousRoundResult = model.previousRoundResult + 1
                 , codePosition = getCodeStringPos Code.code model.codePosition model.ebitRate
               }
             , Cmd.none
