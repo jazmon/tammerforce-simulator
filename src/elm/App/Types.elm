@@ -12,7 +12,7 @@ type Msg
     | AddCoder { coderIndex : Int }
     | Tick Time
     | KeyMsg Keyboard.KeyCode
-    | UpgradeOffice Int
+    | UpgradeOffice Int Int
 
 
 type alias Model =

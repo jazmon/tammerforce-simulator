@@ -49,8 +49,8 @@ update msg model =
             , Cmd.none
             )
 
-        UpgradeOffice extra ->
-            ( { model | ebitRate = model.ebitRate + extra }, Cmd.none )
+        UpgradeOffice extra cost ->
+            ( { model | ebitRate = model.ebitRate + extra, ebit = model.ebit - cost }, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
