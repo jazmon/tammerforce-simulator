@@ -15,6 +15,11 @@ view model =
             , span [] [ text " k€" ]
             ]
         , br [] []
+        , span [ class "stats-label small" ] [ text "Yesterday's EBIT" ]
+        , br [] []
+        , span [ class "stats-value small" ] [ text <| toString <| model.previousRoundResult ]
+
+        , br [] []
         , span [ class "stats-label" ] [ text "Coders" ]
         , br [] []
         , span [ class "stats-value" ] [ text <| toString <| List.length model.coders ]

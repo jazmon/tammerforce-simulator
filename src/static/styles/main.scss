@@ -35,10 +35,14 @@ body {
 .stats-label {
   color: $COLOR_TEXT_TERTIARY_INVERSE;
   font-size: 25px;
+
+  &.small { font-size: 15px; }
 }
 .stats-value {
   color: $COLOR_TEXT_SECONDARY_INVERSE;
   font-size: 40px;
+
+  &.small { font-size: 15px; }
 }
 .code-block {
   background-color: $COLOR_TRANSPARENT;
