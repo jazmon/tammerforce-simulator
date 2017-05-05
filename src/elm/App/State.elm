@@ -4,6 +4,9 @@ import App.Types exposing (..)
 import Time exposing (Time, second)
 import Keyboard
 
+import Shared.Data exposing (..)
+import Shared.Types exposing (Coder)
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -14,13 +17,19 @@ update msg model =
         GenerateEbit amount ->
             ( { model | ebit = model.ebit + amount }, Cmd.none )
 
-        AddCoder coder ->
-            ( { model
-                | coders = coder :: model.coders
-                , ebit = model.ebit - coder.cost
-              }
-            , Cmd.none
-            )
+        -- AddCoder coder ->
+        --     ( { model
+        --         | coders = coder :: model.coders
+        --         , ebit = model.ebit - coder.cost
+        --       }
+        --     , Cmd.none
+        --     )
+        TriggerAddCoder payload ->
+            ( model, (getRandomCoderIndex payload) )
+
+        AddCoder payload ->
+          ( { model | coders = (( Coder payload.ebitRate payload.cost (getCoderByIndex payload.coderIndex) ) :: model.coders )
+                    , ebit = model.ebit - payload.cost}, Cmd.none )
 
         Tick time ->
             ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )

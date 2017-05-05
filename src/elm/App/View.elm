@@ -3,7 +3,11 @@ module App.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
+
 import App.Types exposing (Msg(..), Model)
+
+import Shared.Types exposing (..)
+
 import Code
 import Regex
 import Array

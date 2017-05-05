@@ -38,7 +38,7 @@ view applicant =
               [ type_ "button", class "btn btn-secondary", attribute "data-dismiss" "modal" ]
               [ text "Pass" ]
             , button
-              [ type_ "button", class "btn btn-primary", attribute "data-dismiss" "modal", onClick <| AddCoder { ebitRate = applicant.ebitRate, cost = applicant.cost }]
+              [ type_ "button", class "btn btn-primary", attribute "data-dismiss" "modal", onClick <| TriggerAddCoder { ebitRate = 2, cost = 1 }]
               [ text "Hire" ]
             ]
           ]

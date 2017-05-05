@@ -1,6 +1,6 @@
 module App.Types exposing (..)
 
-import Shared.Types exposing (Coder, Applicant)
+import Shared.Types exposing (..)
 import Time exposing (Time)
 import Keyboard
 
@@ -8,7 +8,8 @@ import Keyboard
 type Msg
     = NoOp
     | GenerateEbit Int
-    | AddCoder Coder
+    | TriggerAddCoder CoderCreationTriggeringPayload
+    | AddCoder CoderCreationPayload
     | Tick Time
     | KeyMsg Keyboard.KeyCode
     | UpgradeGear Int
