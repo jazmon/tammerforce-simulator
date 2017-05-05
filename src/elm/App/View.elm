@@ -21,12 +21,15 @@ view model =
             { ebitRate = 2, cost = 100 }
     in
         div [ class "container-fluid background" ]
-            [ div [ class "container" ]
-                [ Components.Stats.view model
+            [ div [ class "row" ]
+                [ div [ class "col-md-4 container" ]
+                    [ Components.Stats.view model
+                    , button [ class "btn btn-primary", onClick <| AddCoder newCoder ] [ text "Hire a coder" ]
+                    , button [ class "btn btn-primary", onClick <| UpgradeGear 2 ] [ text "Upgrade gear" ]
+                    ]
+                , div [ class "col-md-6" ]
+                    [ Components.CodeBlock.view codeString ]
                 ]
-            , button [ onClick <| AddCoder newCoder ] [ text "Hire a coder" ]
-            , button [ onClick <| UpgradeGear 2 ] [ text "Upgrade gear" ]
-            , Components.CodeBlock.view codeString
             ]
 
 

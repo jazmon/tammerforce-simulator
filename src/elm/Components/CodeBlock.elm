@@ -11,7 +11,7 @@ type alias CodeStr =
 
 view : CodeStr -> Html Msg
 view codeString =
-    div [ class "container" ]
+    div [ class "col-md-10" ]
         [ pre
             [ class "code-block" ]
             [ Html.code

@@ -7,7 +7,7 @@ import App.Types exposing (Msg(..), Model)
 
 view : Model -> Html Msg
 view model =
-    div [ class "stats-container" ]
+    div []
         [ span [ class "stats-label" ]
             [ text "EBIT"
             , br [] []
