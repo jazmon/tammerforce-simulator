@@ -3,3 +3,21 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 // can add Boostrap overrides, additional Sass/CSS below...
+$TEXT_COLOR: rgb(28, 244, 43);
+$GLOW_COLOR: rgb(202, 254, 192);
+$BACKGROUND_COLOR: #000;
+.code-block {
+  background: $BACKGROUND_COLOR;
+  color: $TEXT_COLOR;
+  text-shadow: 0 0 3px $GLOW_COLOR;
+  animation-duration: 0.6s;
+  animation-name: glow;
+  height: 60vh;
+  font: 'Futurice-Monospaced', monospace;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+@keyframes glow {
+        from { text-shadow: 0 0 2px $GLOW_COLOR; }
+        to { text-shadow: 0 0 8px $GLOW_COLOR; }
+    }
