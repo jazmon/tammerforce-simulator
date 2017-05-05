@@ -7,12 +7,15 @@ import App.Types exposing (Msg(..), Model)
 
 view : Model -> Html Msg
 view model =
-    div [ class "stats-container" ] [
-        span [ class "stats-label" ] [ text "EBIT"]
+    div [ class "stats-container" ]
+        [ span [ class "stats-label" ]
+            [ text "EBIT"
+            , br [] []
+            , span [ class "stats-value" ] [ text <| toString <| model.ebit ]
+            , span [] [ text " k€" ]
+            ]
         , br [] []
-        , span [ class "stats-value" ] [ text <| toString <| model.ebit ]
+        , span [ class "stats-label" ] [ text "Coders" ]
         , br [] []
-        , span [ class "stats-label" ] [ text "Coders"]
-        , br [] []
-        , span [ class "stats-value" ] [ text <| toString  <| List.length model.coders ]
-    ]
+        , span [ class "stats-value" ] [ text <| toString <| List.length model.coders ]
+        ]
