@@ -12,23 +12,24 @@ randomMember maxInt = Random.int 0 maxInt
 
 getRandomCoderIndex : CoderCreationTriggeringPayload -> Cmd Msg
 getRandomCoderIndex payload = Random.generate
-  (\ generatedRandomIndex -> AddCoder { ebitRate = payload.ebitRate, cost = payload.cost, coderIndex = generatedRandomIndex })
+  (\ generatedRandomIndex -> AddCoder { coderIndex = generatedRandomIndex })
   (randomMember (List.length coderNames)
   )
 
 coderNames : List Coder
 coderNames =
-  [ (Coder 0 0 "Hessu Kypärä" "miro")
-  , (Coder 0 0 "Ahto Simakuutio" "op")
-  , (Coder 0 0 "Markku Markkula" "ippe")
-  , (Coder 0 0 "Jorma Teräs" "eetu")
+  [ (Coder 3 2 "Hessu Kypärä" "miro")
+  , (Coder 2 1 "Ahto Simakuutio" "op")
+  , (Coder 4 3 "Markku Markkula" "ippe")
+  , (Coder 5 1 "Jorma Teräs" "eetu")
   ]
+
 
 getCoderByIndex : Int -> Coder
 getCoderByIndex idx = Array.fromList coderNames |> Array.get idx  |> \prospect ->
   case prospect of
     Nothing ->
-      (Coder 0 0 "Fallback Coder" "miro")
+      (Coder 1 1 "Fallback Coder" "miro")
 
     Just val ->
       val

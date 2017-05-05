@@ -9,7 +9,7 @@ type Msg
     = NoOp
     | GenerateEbit Int
     | TriggerAddCoder CoderCreationTriggeringPayload
-    | AddCoder CoderCreationPayload
+    | AddCoder { coderIndex : Int }
     | Tick Time
     | KeyMsg Keyboard.KeyCode
     | UpgradeOffice Int
