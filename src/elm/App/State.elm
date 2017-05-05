@@ -22,23 +22,19 @@ update msg model =
             , Cmd.none
             )
 
-        -- AddCoder coder ->
-        --     ( { model
-        --         | coders = coder :: model.coders
-        --         , ebit = model.ebit - coder.cost
-        --       }
-        --     , Cmd.none
-        --     )
         TriggerAddCoder payload ->
             ( model, (getRandomCoderIndex payload) )
 
         AddCoder payload ->
-            ( { model
-                | coders = ((Coder payload.ebitRate payload.cost (getCoderByIndex payload.coderIndex)) :: model.coders)
-                , ebit = model.ebit - payload.cost
+          ( { model
+            | coders = (( Coder model.applicant.ebitRate model.applicant.cost model.applicant.name ) :: model.coders )
+            , ebit = (model.ebit - payload.cost)
+            , applicant =
+              { ebitRate = payload.ebitRate
+              , cost = payload.cost
+              , name = (getCoderByIndex payload.coderIndex)
               }
-            , Cmd.none
-            )
+            } , Cmd.none )
 
         Tick time ->
             ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )
@@ -82,4 +78,5 @@ getStringLineCount string =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { ebitRate = 30, ebit = 0, coders = [], applicant = { ebitRate = 3, cost = 150, name = "Hessu Kypärä" }, codePosition = 0 }, Cmd.none )
+  -- the first applicant is hard coded in here because of... look, an aeroplane!?
+    ( { ebitRate = 0, ebit = 0, coders = [], applicant = { ebitRate = 3 , cost = 150 , name = "Summer Mickey"}, codePosition = 0 }, Cmd.none )
