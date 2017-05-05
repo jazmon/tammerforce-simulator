@@ -1,6 +1,7 @@
 module App.State exposing (..)
 
 import App.Types exposing (..)
+import Time exposing (Time, second)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -15,10 +16,13 @@ update msg model =
         AddCoder coder ->
             ( { model | coders = coder :: model.coders }, Cmd.none )
 
+        Tick time ->
+            ( { model | ebit = List.sum <| List.map .ebitRate model.coders }, Cmd.none )
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Time.every second Tick
 
 
 init : ( Model, Cmd Msg )
