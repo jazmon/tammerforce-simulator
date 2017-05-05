@@ -13,22 +13,35 @@ import Components.Hello exposing (hello)
 -- APP
 
 
-main : Program Never Int Msg
+main : Program Never Model Msg
 main =
-    Html.beginnerProgram { model = model, view = view, update = update }
+    Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
 
 
 
 -- MODEL
 
 
+type alias Customer =
+    { money : Int
+    }
+
+
 type alias Model =
-    Int
+    { coffee : Int
+    , ebit : Int
+    , customers : List Customer
+    }
 
 
-model : number
+model : Model
 model =
-    0
+    { coffee = 0, ebit = 0, customers = [] }
+
+
+init : ( Model, Cmd Msg )
+init =
+    ( { coffee = 0, ebit = 0, customers = [] }, Cmd.none )
 
 
 
@@ -40,14 +53,23 @@ type Msg
     | Increment
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NoOp ->
-            model
+            ( model, Cmd.none )
 
         Increment ->
-            model + 1
+            ( { model | ebit = model.ebit + 1 }, Cmd.none )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
 
 
@@ -64,7 +86,7 @@ view model =
             [ div [ class "col-xs-12" ]
                 [ div [ class "jumbotron" ]
                     [ img [ src "static/img/elm.jpg", style styles.img ] [] -- inline CSS (via var)
-                    , hello model -- ext 'hello' component (takes 'model' as arg)
+                    , hello model.ebit -- ext 'hello' component (takes 'model' as arg)
                     , p [] [ text ("Elm Webpack Starter") ]
                     , button [ class "btn btn-primary btn-lg", onClick Increment ]
                         [ -- click handler
