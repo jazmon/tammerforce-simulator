@@ -17,7 +17,7 @@ update msg model =
             ( { model | coders = coder :: model.coders }, Cmd.none )
 
         Tick time ->
-            ( { model | ebit = List.sum <| List.map .ebitRate model.coders }, Cmd.none )
+            ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
