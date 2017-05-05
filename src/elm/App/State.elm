@@ -26,7 +26,10 @@ update msg model =
             ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )
 
         KeyMsg keycode ->
-            ( { model | ebit = model.ebit + 1 }, Cmd.none )
+            ( { model | ebit = model.ebit + model.ebitRate }, Cmd.none )
+
+        UpgradeGear extra ->
+            ( { model | ebitRate = model.ebitRate + extra }, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -39,4 +42,4 @@ subscriptions model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { ebitRate = 0, ebit = 0, coders = [] }, Cmd.none )
+    ( { ebitRate = 1, ebit = 0, coders = [] }, Cmd.none )

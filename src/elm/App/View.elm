@@ -25,6 +25,7 @@ view model =
                 [ Components.Stats.view model
                 ]
             , button [ onClick <| AddCoder newCoder ] [ text "Hire a coder" ]
+            , button [ onClick <| UpgradeGear 2 ] [ text "Upgrade gear" ]
             , Components.CodeBlock.view codeString
             ]
 

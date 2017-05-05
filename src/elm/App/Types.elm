@@ -11,6 +11,7 @@ type Msg
     | AddCoder Coder
     | Tick Time
     | KeyMsg Keyboard.KeyCode
+    | UpgradeGear Int
 
 
 type alias Model =

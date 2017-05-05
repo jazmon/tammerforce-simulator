@@ -18,4 +18,8 @@ view model =
         , span [ class "stats-label" ] [ text "Coders" ]
         , br [] []
         , span [ class "stats-value" ] [ text <| toString <| List.length model.coders ]
+        , br [] []
+        , span [ class "stats-label" ] [ text "Gear level" ]
+        , br [] []
+        , span [ class "stats-value" ] [ text <| toString <| model.ebitRate ]
         ]
