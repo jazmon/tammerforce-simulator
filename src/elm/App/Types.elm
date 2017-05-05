@@ -20,4 +20,5 @@ type alias Model =
     , ebitRate : Int
     , coders : List Coder
     , applicant : Applicant
+    , codePosition : Int
     }

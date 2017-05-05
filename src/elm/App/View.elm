@@ -3,11 +3,8 @@ module App.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-
 import App.Types exposing (Msg(..), Model)
-
 import Shared.Types exposing (..)
-
 import Code
 import Regex
 import Array
@@ -21,7 +18,7 @@ view : Model -> Html Msg
 view model =
     let
         codeString =
-            getCodeString Code.code model.ebit
+            getCodeString Code.code model.codePosition
 
         newCoder =
             { ebitRate = 2, cost = 100 }
@@ -38,7 +35,7 @@ view model =
                         [ Components.CodeBlock.view codeString ]
                     ]
                 ]
-                , Components.Modal.view model.applicant
+            , Components.Modal.view model.applicant
             ]
 
 
