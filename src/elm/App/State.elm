@@ -82,6 +82,8 @@ init : ( Model, Cmd Msg )
 init =
     ( { ebitRate = 1
       , ebit = 0
+      , knifeFactor = 0 -- the more knife factor the office has,
+      , previousRoundResult = 0
       , coders = []
       -- the first applicant is hard coded in here because of... look, an aeroplane!?
       , applicant = { ebitRate = 1, cost = 1, name = "Summer Mickey", imageClass = "miro" }

@@ -18,6 +18,8 @@ type Msg
 type alias Model =
     { ebit : Int
     , ebitRate : Int
+    , knifeFactor : Int
+    , previousRoundResult : Int
     , coders : List Coder
     , applicant : Applicant
     , codePosition : Int
