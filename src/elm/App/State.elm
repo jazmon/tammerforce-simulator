@@ -26,15 +26,20 @@ update msg model =
             ( model, (getRandomCoderIndex payload) )
 
         AddCoder payload ->
-          ( { model
-            | coders = (( Coder model.applicant.ebitRate model.applicant.cost model.applicant.name ) :: model.coders )
+          let
+            randomCoder = (getCoderByIndex payload.coderIndex)
+            filledCoder = ({ randomCoder | ebitRate = payload.ebitRate , cost = payload.cost })
+          in
+            ({ model
+            | coders = filledCoder :: model.coders
             , ebit = (model.ebit - payload.cost)
             , applicant =
               { ebitRate = payload.ebitRate
               , cost = payload.cost
-              , name = (getCoderByIndex payload.coderIndex)
+              , name = randomCoder.name
+              , imageClass = randomCoder.imageClass
               }
-            } , Cmd.none )
+            }, Cmd.none )
 
         Tick time ->
             ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )
@@ -79,4 +84,4 @@ getStringLineCount string =
 init : ( Model, Cmd Msg )
 init =
   -- the first applicant is hard coded in here because of... look, an aeroplane!?
-    ( { ebitRate = 0, ebit = 0, coders = [], applicant = { ebitRate = 3 , cost = 150 , name = "Summer Mickey"}, codePosition = 0 }, Cmd.none )
+    ( { ebitRate = 0, ebit = 0, coders = [], applicant = { ebitRate = 3 , cost = 150 , name = "Summer Mickey", imageClass = "miro" }, codePosition = 0 }, Cmd.none )

@@ -58,3 +58,36 @@ body {
         from { text-shadow: 0 0 2px $GLOW_COLOR; }
         to { text-shadow: 0 0 8px $GLOW_COLOR; }
     }
+
+.face {
+  width: 116px;
+  height: 116px;
+  background-image: url('http://retro.tammerforce.com/images/faces.png');
+}
+.face--miro {
+  background-position: 0 -14268px;
+  &:hover {
+    background-position: 0 -14152px;
+  }
+}
+.face--op {
+  background-position: 0 -15080px;
+  &:hover {
+    background-position: 0 -14848px;
+  }
+}
+.face--ippe {
+  background-position: 0 -1276px;
+  &:hover {
+    background-position: 0 -1508px;
+  }
+}
+.face--eetu {
+  background-position: 0 -2320px;
+  &:hover {
+    background-position: 0 -2552px;
+  }
+}
+.recruit {
+  display: flex;
+}

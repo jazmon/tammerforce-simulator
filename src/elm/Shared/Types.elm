@@ -4,17 +4,16 @@ module Shared.Types exposing (..)
 type alias Coder =
     { ebitRate : Int
     , cost : Int
-    , name: String
+    , name : String
+    , imageClass : String
     }
 
 type alias Applicant =
     { ebitRate: Int
     , cost : Int
     , name : String
+    , imageClass : String
     }
-
-
-
 
 type alias CoderCreationTriggeringPayload =
   { ebitRate : Int, cost: Int }

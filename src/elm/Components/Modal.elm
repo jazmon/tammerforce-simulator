@@ -23,23 +23,28 @@ view applicant =
             ]
           , div
             [ class "modal-body" ]
-            [ text "Name: "
-              , text applicant.name
-              , br [][]
-              , text "Cost: "
-              , text <| toString <| applicant.cost
-              , br [][]
-              , text "Ebit rate: "
-              , text <| toString <| applicant.ebitRate
-            ]
-          , div
-            [ class "modal-footer" ]
-            [ button
-              [ type_ "button", class "btn btn-secondary", attribute "data-dismiss" "modal" ]
-              [ text "Pass" ]
-            , button
-              [ type_ "button", class "btn btn-primary", attribute "data-dismiss" "modal", onClick <| TriggerAddCoder { ebitRate = 2, cost = 1 }]
-              [ text "Hire" ]
+            [ div [ class "recruit" ]
+              [ div [ class ("face face--" ++ applicant.imageClass) ] []
+              , div [ class "description" ]
+                [ text "Name: "
+                , text applicant.name
+                , br [][]
+                , text "Cost: "
+                , text <| toString <| applicant.cost
+                , br [][]
+                , text "Ebit rate: "
+                , text <| toString <| applicant.ebitRate
+                ]
+              ]
+            , div
+              [ class "modal-footer" ]
+              [ button
+                [ type_ "button", class "btn btn-secondary", attribute "data-dismiss" "modal" ]
+                [ text "Pass" ]
+              , button
+                [ type_ "button", class "btn btn-primary", attribute "data-dismiss" "modal", onClick <| TriggerAddCoder { ebitRate = 2, cost = 1 }]
+                [ text "Hire" ]
+              ]
             ]
           ]
         ]

@@ -16,21 +16,19 @@ getRandomCoderIndex payload = Random.generate
   (randomMember (List.length coderNames)
   )
 
-
-
-coderNames : List String
-coderNames = [
-  "Hessu Kypärä"
-  , "Ahto Simakuutio"
-  , "Markku Markkula"
-  , "Jorma Teräs"
+coderNames : List Coder
+coderNames =
+  [ (Coder 0 0 "Hessu Kypärä" "miro")
+  , (Coder 0 0 "Ahto Simakuutio" "op")
+  , (Coder 0 0 "Markku Markkula" "ippe")
+  , (Coder 0 0 "Jorma Teräs" "eetu")
   ]
 
-getCoderByIndex : Int -> String
+getCoderByIndex : Int -> Coder
 getCoderByIndex idx = Array.fromList coderNames |> Array.get idx  |> \prospect ->
   case prospect of
     Nothing ->
-      "Fallback Coder"
+      (Coder 0 0 "Fallback Coder" "miro")
 
     Just val ->
       val
