@@ -6,6 +6,7 @@ import Keyboard
 import Code
 import Shared.Data exposing (..)
 import Shared.Types exposing (Coder)
+import Debug exposing (log)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -26,6 +27,9 @@ update msg model =
             ( model, (getRandomCoderIndex payload) )
 
         AddCoder payload ->
+            ( { model
+                | coders = ((Coder payload.ebitRate payload.cost (getCoderByIndex payload.coderIndex)) :: model.coders)
+                , ebit = model.ebit - payload.cost
           let
             randomCoder = (getCoderByIndex payload.coderIndex)
             filledCoder = ({ randomCoder | ebitRate = payload.ebitRate , cost = payload.cost })
@@ -35,14 +39,19 @@ update msg model =
             , ebit = (model.ebit - payload.cost)
             , applicant =
               { ebitRate = payload.ebitRate
-              , cost = payload.cost
               , name = randomCoder.name
+              , cost = payload.cost
               , imageClass = randomCoder.imageClass
               }
             }, Cmd.none )
 
         Tick time ->
-            ( { model | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders) }, Cmd.none )
+            ( { model
+                | ebit = model.ebit + (List.sum <| List.map .ebitRate model.coders)
+                , codePosition = getCodeStringPos Code.code model.codePosition (List.sum <| List.map .ebitRate model.coders)
+              }
+            , Cmd.none
+            )
 
         KeyMsg keycode ->
             ( { model
@@ -83,5 +92,11 @@ getStringLineCount string =
 
 init : ( Model, Cmd Msg )
 init =
-  -- the first applicant is hard coded in here because of... look, an aeroplane!?
-    ( { ebitRate = 0, ebit = 0, coders = [], applicant = { ebitRate = 3 , cost = 150 , name = "Summer Mickey", imageClass = "miro" }, codePosition = 0 }, Cmd.none )
+    ( { ebitRate = 1
+      , ebit = 0
+      , coders = []
+      , applicant = { ebitRate = 3, cost = 150, name = "Summer Mickey", imageClass = "miro" }
+      , codePosition = 0
+      }
+    , Cmd.none
+    )
