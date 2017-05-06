@@ -24,3 +24,16 @@ type alias CoderCreationPayload =
 type alias Customer =
     { money : Int
     }
+
+
+type alias Event =
+    { description : String
+    , options : List Option
+    }
+
+type alias Option =
+    { description : String
+    , ebitDelta : Int
+    , ebitRateDelta : Int
+    , knifeFactorDelta : Int
+    }
