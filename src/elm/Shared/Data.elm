@@ -32,6 +32,15 @@ coderNames =
   ]
 
 
+eventStash : List Event
+eventStash =
+  [ (Event "Coffee machine exploded" [
+    (Option "Buy a new one!" "Not surprisignly people are happy. Coffee keeps this shitshow going!" -5 -5 0)
+    , (Option "Drink water" "What is this shit. How can you deliver without black gold?" 0 10 0)
+    ])
+  ]
+
+
 getCoderByIndex : Int -> Coder
 getCoderByIndex idx = Array.fromList coderNames |> Array.get idx  |> \prospect ->
   case prospect of

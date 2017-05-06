@@ -36,6 +36,6 @@ type alias Option =
     , outcomeDescription : String -- what will happen if this is selected
     -- the outcome to the state if this option is selected:
     , ebitDelta : Int
-    , ebitRateDelta : Int
     , knifeFactorDelta : Int
+    , ebitRateDelta : Int
     }
