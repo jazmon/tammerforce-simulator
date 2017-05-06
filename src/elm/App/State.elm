@@ -41,17 +41,23 @@ update msg model =
             ( model, (getRoundRandomFactor) )
 
         ExecuteRound payload ->
-          let
-            ebitRate = (List.sum <| List.map .ebitRate model.coders)
-            roundResult = if ebitRate > 0 then payload.randomFactor + ebitRate else 0
-          in
-            ( { model
-                | ebit = model.ebit + roundResult
-                , previousRoundResult = roundResult
-                , codePosition = getCodeStringPos Code.code model.codePosition (List.sum <| List.map .ebitRate model.coders)
-              }
-            , Cmd.none
-            )
+            let
+                ebitRate =
+                    (List.sum <| List.map .ebitRate model.coders)
+
+                roundResult =
+                    if ebitRate > 0 then
+                        payload.randomFactor + ebitRate
+                    else
+                        0
+            in
+                ( { model
+                    | ebit = model.ebit + roundResult
+                    , previousRoundResult = roundResult
+                    , codePosition = getCodeStringPos Code.code model.codePosition (List.sum <| List.map .ebitRate model.coders)
+                  }
+                , Cmd.none
+                )
 
         TickEvent time ->
             if (Basics.floor (Time.inSeconds time)) % 10 == 0 then
@@ -71,8 +77,15 @@ update msg model =
         UpgradeOffice extra cost ->
             ( { model | ebitRate = model.ebitRate + extra, ebit = model.ebit - cost }, Cmd.none )
 
-        ChooseEventResolution resolution ->
-            ( { model | showEvent = False }, Cmd.none )
+        ChooseEventResolution option ->
+            ( { model
+                | showEvent = False
+                , knifeFactor = model.knifeFactor + option.knifeFactorDelta
+                , ebit = model.ebit + option.ebitDelta
+                , ebitRate = model.ebitRate + option.ebitRateDelta
+              }
+            , Cmd.none
+            )
 
 
 subscriptions : Model -> Sub Msg
