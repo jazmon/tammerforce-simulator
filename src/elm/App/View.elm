@@ -16,42 +16,25 @@ import Components.Modal
 
 view : Model -> Html Msg
 view model =
-      div []
-          [ div [ class "container-fluid background" ]
-              [ div [ class "row" ]
-                  [ div [ class "col-md-4 container" ]
-                      [ Components.Stats.view model
-                      , Components.HireButton.view
-                      , button [ class "btn btn-primary", onClick <| UpgradeOffice 2 400 ] [ text "Upgrade Office" ]
-                      ]
-                  , div [ class "col-md-6" ]
-                      [ Components.CodeBlock.view ( getCodeString Code.code model.codePosition) ]
-                  ]
-              ]
-          , Components.Modal.view model.applicant
-          ]
-
-        newCoder =
-            { ebitRate = 2, cost = 100 }
-    in
-        div []
-            [ div [ class "container-fluid background" ]
-                [ div [ class "row" ]
-                    [ div [ class "col-md-4 container" ]
-                        [ Components.Stats.view model
-                        , Components.HireButton.view
-                        , button [ class "btn btn-primary", onClick <| UpgradeOffice 2 400 ] [ text "Upgrade Office" ]
-                        ]
-                    , div [ class "col-md-6" ]
-                        [ Components.CodeBlock.view codeString ]
+    div []
+        [ div [ class "container-fluid background" ]
+            [ div [ class "row" ]
+                [ div [ class "col-md-4 container" ]
+                    [ Components.Stats.view model
+                    , Components.HireButton.view
+                    , button [ class "btn btn-primary", onClick <| UpgradeOffice 2 400 ] [ text "Upgrade Office" ]
                     ]
-                , if model.showEvent then
-                    div [] [ p [] [ text "foasdfasdfasdfasdfasdfasdfo" ], button [ onClick <| ChooseEventResolution 0 ] [ text "foo" ] ]
-                  else
-                    div [] []
+                , div [ class "col-md-6" ]
+                    [ Components.CodeBlock.view (getCodeString Code.code model.codePosition) ]
                 ]
-            , Components.Modal.view model.applicant
+            , if model.showEvent then
+                div [] [ p [] [ text "foasdfasdfasdfasdfasdfasdfo" ], button [ onClick <| ChooseEventResolution 0 ] [ text "foo" ] ]
+              else
+                div [] []
             ]
+        , Components.Modal.view model.applicant
+        ]
+
 
 getCodeString : String -> Int -> String
 getCodeString code amount =
