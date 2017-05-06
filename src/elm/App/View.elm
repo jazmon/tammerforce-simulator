@@ -28,7 +28,20 @@ view model =
                     [ Components.CodeBlock.view (getCodeString Code.code model.codePosition) ]
                 ]
             , if model.showEvent then
-                div [] [ p [] [ text "foasdfasdfasdfasdfasdfasdfo" ], button [ onClick <| ChooseEventResolution 0 ] [ text "foo" ] ]
+                div []
+                    [ p [] [ text "foasdfasdfasdfasdfasdfasdfo" ]
+                    , button
+                        [ onClick <|
+                            ChooseEventResolution
+                                { description = "Foo"
+                                , outcomeDescription = "foo"
+                                , ebitDelta = 1000
+                                , ebitRateDelta = 2
+                                , knifeFactorDelta = 0
+                                }
+                        ]
+                        [ text "foo" ]
+                    ]
               else
                 div [] []
             ]
