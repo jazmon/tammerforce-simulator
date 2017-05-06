@@ -5,6 +5,10 @@ import Time exposing (Time)
 import Keyboard
 
 
+type alias EventResolution =
+    Int
+
+
 type Msg
     = NoOp
     | GenerateEbit Int
@@ -14,6 +18,8 @@ type Msg
     | Tick Time
     | KeyMsg Keyboard.KeyCode
     | UpgradeOffice Int Int
+    | TickEvent Time
+    | ChooseEventResolution EventResolution
 
 
 type alias Model =
@@ -24,4 +30,5 @@ type alias Model =
     , coders : List Coder
     , applicant : Applicant
     , codePosition : Int
+    , showEvent : Bool
     }

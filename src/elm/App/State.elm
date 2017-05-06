@@ -6,7 +6,9 @@ import Keyboard
 import Code
 import Shared.Data exposing (..)
 import Shared.Types exposing (Coder)
-import Debug exposing (log)
+
+
+-- import Debug exposing (log)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -27,11 +29,13 @@ update msg model =
             ( model, getRandomCoderIndex )
 
         AddCoder payload ->
-          ( { model
-            | coders = ( model.applicant :: model.coders )
-            , ebit = (model.ebit - model.applicant.cost)
-            , applicant = (getCoderByIndex payload.coderIndex)
-            } , Cmd.none )
+            ( { model
+                | coders = (model.applicant :: model.coders)
+                , ebit = (model.ebit - model.applicant.cost)
+                , applicant = (getCoderByIndex payload.coderIndex)
+              }
+            , Cmd.none
+            )
 
         Tick time ->
             ( model, (getRoundRandomFactor) )
@@ -49,6 +53,12 @@ update msg model =
             , Cmd.none
             )
 
+        TickEvent time ->
+            if (Basics.floor (Time.inSeconds time)) % 10 == 0 then
+                ( { model | showEvent = True }, Cmd.none )
+            else
+                ( model, Cmd.none )
+
         KeyMsg keycode ->
             ( { model
                 | ebit = model.ebit + model.ebitRate
@@ -61,12 +71,16 @@ update msg model =
         UpgradeOffice extra cost ->
             ( { model | ebitRate = model.ebitRate + extra, ebit = model.ebit - cost }, Cmd.none )
 
+        ChooseEventResolution resolution ->
+            ( { model | showEvent = False }, Cmd.none )
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
         [ Time.every second Tick
         , Keyboard.downs KeyMsg
+        , Time.every second TickEvent
         ]
 
 
@@ -76,7 +90,7 @@ getCodeStringPos string codePosition increase =
         lineCount =
             getStringLineCount string
     in
-        if codePosition >= (getStringLineCount string - 1 - increase) then
+        if codePosition >= (getStringLineCount string - 10 - increase) then
             1
         else
             codePosition + increase
@@ -94,9 +108,11 @@ init =
       , knifeFactor = 0 -- the more knife factor the office has,
       , previousRoundResult = 0
       , coders = []
+
       -- the first applicant is hard coded in here because of... look, an aeroplane!?
       , applicant = { ebitRate = 1, cost = 1, name = "Summer Mickey", imageClass = "miro" }
       , codePosition = 0
+      , showEvent = False
       }
     , Cmd.none
     )
