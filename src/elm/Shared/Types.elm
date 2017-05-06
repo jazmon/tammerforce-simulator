@@ -32,7 +32,9 @@ type alias Event =
     }
 
 type alias Option =
-    { description : String
+    { description : String -- what this option says it will do
+    , outcomeDescription : String -- what will happen if this is selected
+    -- the outcome to the state if this option is selected:
     , ebitDelta : Int
     , ebitRateDelta : Int
     , knifeFactorDelta : Int
